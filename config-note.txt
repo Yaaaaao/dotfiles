@@ -1,0 +1,140 @@
+0. 强制使用VIM模式
+
+	set nocompatible
+
+1. 更改vimrc后，在保存时自动载入新配置
+
+	autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
+2. 打开C或者C++源文件时，自动打开tagbar窗口
+
+	autocmd FileType c,cpp nested :TagbarOpen
+
+3. 打开文件时，光标跳转到上次打开时的位置
+	" When editing a file, always jump to the last known cursor position.
+	" Don't do it when the position is invalid or when inside an event handler
+	" (happens when dropping a file on gvim).
+	" Also don't do it when the mark is in the first line, that is the default
+	" position when opening a file.
+	autocmd BufReadPost *
+	\ if line("'\"") > 1 && line("'\"") <= line("$") |
+	\   exe "normal! g`\"" |
+	\ endif
+
+4. VIM 插件管理 Vundle
+
+	filetype off                  " required by Vundle
+
+	" set the runtime path to include Vundle and initialize
+	set rtp+=~/.vim/bundle/Vundle.vim
+
+	" Keep Plugin commands between vundle#begin/end.
+	call vundle#begin()
+	" Examples
+	"   a. plugin on GitHub repo <https://github.com/>
+	"      Plugin 'tpope/vim-fugitive'
+	"   b. plugin from http://vim-scripts.org/vim/scripts.html
+	"      Plugin 'L9'
+	"   c. Git plugin not hosted on GitHub
+	"      Plugin 'git://git.wincent.com/command-t.git'
+	"   d. git repos on your local machine
+	"      Plugin 'file:///home/gmarik/path/to/plugin'
+	"   e. The sparkup vim script is in a subdirectory of this repo called vim.
+	"      Pass the path to set the runtimepath properly.
+	"      Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+	"   e. Avoid a name conflict with L9
+	"      Plugin 'user/L9', {'name': 'newL9'}
+
+	" let Vundle manage Vundle, required
+	Plugin 'VundleVim/Vundle.vim'
+	Plugin 'kien/ctrlp.vim'
+	Plugin 'majutsushi/tagbar'
+	Plugin 'aceofall/gtags.vim'
+	Plugin 'scrooloose/nerdtree'
+	Plugin 'jistr/vim-nerdtree-tabs'
+	Plugin 'scrooloose/nerdcommenter'
+	Plugin 'ntpeters/vim-better-whitespace'
+	call vundle#end()            " required
+
+5. 通用配置
+
+  a. 根据文件类型载入对应的indent插件
+	filetype plugin indent on
+
+  b. 改善中文乱码问题
+	set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,gb2312,latin1
+
+  c. 文件被其他编辑器改变后，自动载入新文件内容
+	set autoread
+
+  d. 执行部分命令时，将改动的buffer写入磁盘
+	set autowriteall
+
+  e. 根据当前的buffer，改变working directory
+	set autochdir
+
+  f. 使用solarized dark配色
+	set background=dark
+	colorscheme solarized
+
+6. UI配置
+
+  a. 显示行号和模式
+	set number
+	set showmode
+
+  b. 高亮搜索，智能匹配大小写
+	set cursorline
+	set showmatch
+	set incsearch
+	set hlsearch
+	set ignorecase
+	set smartcase
+
+  c. 状态行
+	" Vim Status line
+	set laststatus=2                  " 总是显示状态栏
+	set statusline=%(%l,%c%V%)\ %p%%  " 行、列和百分比
+	set statusline+=%w%h%m%r          " buffer可编辑属性，例如只读、可写...
+	set statusline+=\ [%{&ff}/%Y]     " 文件类型
+	set statusline+=\ [%{getcwd()}]   " 当前工作目录
+	set statusline+=\ %f              " 文件名
+
+  d. 自动完成候选列表
+	set wildmenu                    " Show list instead of just completing
+	set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
+
+  e. 启动时自动折叠
+	set foldenable                  " Auto fold code
+
+  f. ??
+	set backspace=indent,eol,start  " Allow backspace over everything in insert mode
+
+
+7. 格式化配置
+
+  a. 智能缩进
+	set autoindent                  " Indent at the same level of the previous line
+	set smartindent
+
+  b. 对C源码使用Linux缩进风格
+	" linux kernel style for C source file
+	"
+	" 1. Wrap long lines exceeding 80 bytes
+	" 2. Don't expand tab into spaces
+	" 3. An indentation every four columns
+	" 4. Let backspace delete indent
+	" 5. Shitf 8 spaces for '>>'
+	autocmd FileType c
+		\ set wrap |
+		\ set textwidth=80 |
+		\ set noexpandtab |
+		\ set tabstop=8 |
+		\ set softtabstop=8 |
+		\ set shiftwidth=8 |
+
+8. 快捷键绑定
+
+
+9. 插件
+
