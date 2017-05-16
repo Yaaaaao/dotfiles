@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# bcompare reads timestamp from registry to inspect evaluation duration
+# Remove all registry.dat every week to gain endless evaluation cycle
+
+for registry in /home/*/.config/bcompare/registry.dat
+do
+	test -f ${registry} || continue
+	rm ${registry}
+done
