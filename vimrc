@@ -58,6 +58,12 @@
 	" let Vundle manage Vundle, required
 	Plugin 'VundleVim/Vundle.vim'
 
+	Plugin 'Valloric/YouCompleteMe'
+	Plugin 'SirVer/ultisnips'
+	Plugin 'honza/vim-snippets'
+	Plugin 'majutsushi/tagbar'
+	Plugin 'aceofall/gtags.vim'
+	Plugin 'flazz/vim-colorschemes'
 	call vundle#end()            " required
 " Plugins end}
 
@@ -122,6 +128,40 @@
 		\ set shiftwidth=8 |
 " Formatting end }
 
+" Plugins Settings {
+	" Ultisnips.vim {
+		let g:UltiSnipsExpandTrigger = "<c-j>"
+		let g:UltiSnipsListSnippets = "<c-tab>"
+		let g:UltiSnipsUsePythonVersion = 3
+		let g:UltiSnipsSnippetDirectories=$HOME.'/.vim/vim-snippets/UltiSnips'
+	" }
+	" YouCompleteMe {
+		let g:ycm_autoclose_preview_window_after_completion = 1
+		let g:ycm_confirm_extra_conf = 0
+	" }
+
+	" tagbar.vim {
+		let g:tagbar_left = 1
+		let g:tagbar_width = 25
+		let g:tagbar_indent = 2
+		let g:tagbar_singleclick = 1
+		let g:tagbar_autoshowtag = 1
+		let g:tagbar_sort = 0
+	" }
+
+	" gtags.vim {
+		" It take a little while to update GTAGS database
+		" after editing a file and exit by ':wq', but it is
+		" fast if no file got edited and exit by ':q'
+		let g:Gtags_Auto_Update=1
+		" Load on demand
+		let GtagsCscope_Auto_Load=0
+		let GtagsCscope_Keep_Alive=1
+		let GtagsCscope_Absolute_Path=1
+		let g:GtagsCscope_Auto_Map=1
+	" }
+" Plugins Settings end }
+
 " Keys mapping {
 	" map leader, for shortcout mapping
 	let mapleader=","
@@ -131,4 +171,9 @@
 
 	nmap <Leader>y  "+y
 	nmap <Leader>p  "+p
+
+	" Gtags/Gtags-cscope shortcut
+	map <Leader>gl :GtagsCscope<CR>
+
+	map <Leader>tb :Tagbar<CR>
 " Keys mapping end }
