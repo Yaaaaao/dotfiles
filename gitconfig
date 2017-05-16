@@ -1,0 +1,23 @@
+[user]
+	name = Almond Yao
+	email = ylhuajnu@outlook.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[diff]
+	tool = bc
+[difftool]
+	prompt = false
+	bc = trustExitCode
+[core]
+	abbrev = 12
+[merge]
+	tool = bc
+[mergetool]
+	bc = trustExitCode
+[core]
+	pager = less -x1,9
+[alias]
+	dt = difftool -d
+	lg = log --color --graph --pretty
